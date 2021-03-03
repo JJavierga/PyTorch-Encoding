@@ -130,7 +130,9 @@ def get_fcn(dataset='pascal_voc', backbone='resnet50s', pretrained=False,
     """
     # infer number of classes
     from ...datasets import datasets, acronyms
-    model = FCN(datasets[dataset.lower()].NUM_CLASS, backbone=backbone, root=root, **kwargs)
+    #model = FCN(datasets[dataset.lower()].NUM_CLASS, backbone=backbone, root=root, **kwargs)
+    #hardcoded:
+    model = FCN(datasets[2, backbone=backbone, root=root, **kwargs)
     if pretrained:
         from ..model_store import get_model_file
         model.load_state_dict(torch.load(

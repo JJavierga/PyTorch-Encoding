@@ -130,8 +130,12 @@ def get_deeplab(dataset='pascal_voc', backbone='resnet50s', pretrained=False,
             root='~/.encoding/models', **kwargs):
     # infer number of classes
     from ...datasets import datasets, acronyms
-    model = DeepLabV3(datasets[dataset.lower()].NUM_CLASS, backbone=backbone, root=root, **kwargs)
+    #Original:model = DeepLabV3(datasets[dataset.lower()].NUM_CLASS, backbone=backbone, root=root, **kwargs)
+    #Modified:
+    print("E")
+    model = DeepLabV3(2, backbone=backbone, root=root, **kwargs)
     if pretrained:
+        print("A")
         from ..model_store import get_model_file
         model.load_state_dict(torch.load(
             get_model_file('deeplab_%s_%s'%(backbone, acronyms[dataset]), root=root)))

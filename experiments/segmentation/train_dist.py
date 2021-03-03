@@ -22,7 +22,7 @@ from torch.nn.parallel.scatter_gather import gather
 from torch.nn.parallel import DistributedDataParallel
 
 import encoding.utils as utils
-from encoding.nn import SegmentationLosses, DistSyncBatchNorm
+from encoding.nn import SegmentationLosses, DistSyncBatchNorm, SyncBatchNorm
 
 from encoding.datasets import get_dataset
 from encoding.models import get_segmentation_model
@@ -174,20 +174,24 @@ def main_worker(gpu, ngpus_per_node, args):
     train_sampler = torch.utils.data.distributed.DistributedSampler(trainset)
     val_sampler = torch.utils.data.distributed.DistributedSampler(valset, shuffle=False)
     # dataloader
+    print("B")
     loader_kwargs = {'batch_size': args.batch_size, 'num_workers': args.workers, 'pin_memory': True}
     trainloader = data.DataLoader(trainset, sampler=train_sampler, drop_last=True, **loader_kwargs)
     valloader = data.DataLoader(valset, sampler=val_sampler, **loader_kwargs)
     nclass = trainset.num_class
     # model
+    print("C")
     model_kwargs = {}
     if args.rectify:
         model_kwargs['rectified_conv'] = True
         model_kwargs['rectify_avg'] = args.rectify_avg
+    print("F")
     model = get_segmentation_model(args.model, dataset=args.dataset,
                                    backbone=args.backbone, aux=args.aux,
-                                   se_loss=args.se_loss, norm_layer=DistSyncBatchNorm,
+                                   se_loss=args.se_loss, norm_layer=SyncBatchNorm,
                                    base_size=args.base_size, crop_size=args.crop_size,
                                    **model_kwargs)
+    print("D")
     if args.gpu == 0:
         print(model)
     # optimizer using different LR
