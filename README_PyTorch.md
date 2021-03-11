@@ -21,7 +21,7 @@
 
  Attention! The images have to be in format nameabcd.jpg and the labels in format nameabcd.png .
 
- :star: :eye: :star: Original repository check that the number of images for training is that of ADE20K dataset, but we don't want that, so I have changed pathtoPyTorch-Encoding/encoding/datasets/ade20k.py so that it only checks that there are images.
+ :star: :eye: :eye: :star: Original repository check that the number of images for training is that of ADE20K dataset, but we don't want that, so I have changed pathtoPyTorch-Encoding/encoding/datasets/ade20k.py so that it only checks that there are images.
 
 
 
