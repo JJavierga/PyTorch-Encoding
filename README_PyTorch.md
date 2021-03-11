@@ -38,6 +38,6 @@
 python3 experiments/segmentation/train_dist.py --model fcn --backbone resnest50 --aux --se-loss --lr=0.001
 ```
 
- :star: :eye: :star: The value of miou given during training is not trustful,so you will have to check images by yourself.
+ :star: :eye: :eye: :star: The value of miou given during training is not trustful,so you will have to check images by yourself.
 
  Results obtained are in folder pathtoPyTorch-Encoding/runs/ade20k/model/backbone/checkpoint.pth.tar
